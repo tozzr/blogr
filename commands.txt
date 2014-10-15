@@ -1,0 +1,4 @@
+bundle install
+rails g foundation:install
+rails generate rspec:install
+guard init rspec
