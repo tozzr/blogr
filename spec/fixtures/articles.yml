@@ -1,0 +1,11 @@
+one:
+  id: 1
+  title: foo
+  text: bar
+  published: false
+
+two:
+  id: 2
+  title: foo 2
+  text: bar 2
+  published: false
