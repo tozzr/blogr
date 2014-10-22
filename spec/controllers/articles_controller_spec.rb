@@ -62,6 +62,7 @@ describe ArticlesController do
     before(:each) do
       @article = Article.new
       allow(@article).to receive(:id).and_return(1)
+      allow(@article).to receive(:title).and_return('foo')
     end
 
     context "The save is successful" do

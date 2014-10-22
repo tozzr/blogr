@@ -54,7 +54,7 @@
           <% if defined?(@articles) %>
             <% @articles.each do |a| %>
               <li>
-                <a href="<%= article_path(a) %>">
+                <a href="/<%= a.slug %>">
                   <%= a.title %>
                 </a>
               </li>
