@@ -51,6 +51,11 @@ describe HomeController do
       expect(response).to render_template('index')
     end
 
+    it "assigns @articles" do
+      get :slug, :slug => @article.slug
+      expect(assigns(:articles)).to_not be_nil
+    end
+
   end
 
 end
