@@ -1,11 +1,13 @@
 one:
   id: 1
-  title: foo
+  title: Foo Bar
   text: bar
+  slug: foo-bar
   published: false
 
 two:
   id: 2
   title: foo 2
   text: bar 2
+  slug: foo-2
   published: false

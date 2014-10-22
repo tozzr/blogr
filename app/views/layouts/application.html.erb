@@ -51,7 +51,15 @@
 
         <h5>articles</h5>
         <ul class="side-nav">
-          <li th:each="link : ${article.links}"><a href="" th:href="${link.uri}" th:text="${link.label}">article title</a></li>
+          <% if defined?(@articles) %>
+            <% @articles.each do |a| %>
+              <li>
+                <a href="<%= article_path(a) %>">
+                  <%= a.title %>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
 
         <div class="panel">
