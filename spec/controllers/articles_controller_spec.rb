@@ -9,7 +9,7 @@ describe ArticlesController do
       expect(response).to be_success
     end
 
-    it "assigns @article" do
+    it "assigns @articles" do
       get :index
       expect(assigns(:articles)).to_not be_nil
     end

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'foundation-rails'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'rspec-rails'

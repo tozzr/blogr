@@ -1,0 +1,5 @@
+bob:
+  id: 1
+  username: bob
+  password_hash: $2a$10$SodxYc/RmnSWT3b1HA6aKe6tV3w58BIyO9Lh5XCzSvQH6n/RG5Bai
+  password_salt: $2a$10$SodxYc/RmnSWT3b1HA6aKe
