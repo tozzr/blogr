@@ -4,7 +4,7 @@ class AuthController < ApplicationController
   end
 
   def login
-    user = User.authenticate(params[:username],params[:password])
+    user = Blog::Security.authenticate(params[:username],params[:password])
     if (user)
       session[:userId] = user.id
       redirect_to articles_path

@@ -2,19 +2,10 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password
 
-  def self.authenticate(username, password)
-    user = find_by_username(username)
-    if (user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt))
-      user
-    else
-      nil
-    end
-  end
-
   def encrypt_password
     if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      self.password_salt = Blog::Security.generate_salt
+      self.password_hash = Blog::Security.hash_secret(password, self.password_salt)
     end
   end
   
