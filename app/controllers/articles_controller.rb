@@ -69,7 +69,7 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       permitted = params.require(:article).permit(:title, :text, :published)
-      permitted[:slug] = Slugr.exec permitted[:title]
+      permitted[:slug] = Blog::Slugr.exec permitted[:title]
       permitted
     end
 end
