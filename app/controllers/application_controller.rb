@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def populate_articles
     @articles = Article.all.order('created_at DESC')
   end
+
+  def check_authorization
+    redirect_to auth_login_path if session[:userId] == nil
+  end
 end

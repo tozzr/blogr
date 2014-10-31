@@ -18,6 +18,7 @@ module Blog
     def self.hash_secret (password, salt)
       BCrypt::Engine.hash_secret(password, salt)
     end
+
   end
 
 end
