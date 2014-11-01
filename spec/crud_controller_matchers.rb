@@ -162,7 +162,7 @@ shared_examples "CRUD POST create" do
     
     it "sets a flash message" do
       do_post
-      expect(flash[:notice]).to be == 'User was successfully created.'
+      expect(flash[:notice]).to be == "#{@model_name} was successfully created."
     end
 
     it "should return JSON when requesting JSON" do
@@ -296,7 +296,7 @@ shared_examples "CRUD PUT update" do
 
     it "sets a flash message" do
       do_put
-      expect(flash[:notice]).to be == 'User was successfully updated.' # Your flash message here
+      expect(flash[:notice]).to be == "#{@model_name} was successfully updated."
     end
 
     it "should render 200 OK for JSON" do
@@ -374,7 +374,7 @@ shared_examples "CRUD DELETE destroy" do
 
     it "sets a flash message" do
       do_delete
-      expect(flash[:notice]).to be == 'User was successfully destroyed.' # Your flash message here
+      expect(flash[:notice]).to be == "#{@model_name} was successfully destroyed."
     end
 
     it "should render 200 when requesting JSON" do
@@ -409,42 +409,51 @@ shared_examples "CRUD DELETE destroy" do
   end
 end
 
-shared_examples "redirect to login" do
-  
+shared_examples "GET index redirects to login" do
   it "GET index" do
     get :index
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "GET show redirects to login" do
   it "GET show" do
     get 'show', :id => 1, :format => 'html'
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "GET new redirects to login" do
   it "GET new" do
     get :new
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "POST create redirects to login" do
   it "POST create" do
     post :create
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "GET edit redirects to login" do
   it "GET edit" do
     get :edit, :id => 1
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "PUT update redirects to login" do
   it "PUT update" do
     put :update, :id => 1
     expect(response).to redirect_to(:auth_login)
   end
+end
 
+shared_examples "DELETE destroy redirects to login" do
   it "DELETE destroy" do
     delete :destroy, :id => 1
     expect(response).to redirect_to(:auth_login)
   end
-
 end
-

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe UsersController do
-  fixtures :users
-
   before(:each) do
     @model = "User"
   end
@@ -12,7 +10,13 @@ describe UsersController do
       session[:userId] = nil
     end
 
-    it_should_behave_like "redirect to login"
+    it_should_behave_like "GET index redirects to login"
+    it_should_behave_like "GET show redirects to login"
+    it_should_behave_like "GET new redirects to login"
+    it_should_behave_like "POST create redirects to login"
+    it_should_behave_like "GET edit redirects to login"
+    it_should_behave_like "PUT update redirects to login"
+    it_should_behave_like "DELETE destroy redirects to login"
   end
 
   context "logged in" do
@@ -27,6 +31,5 @@ describe UsersController do
     it_should_behave_like "CRUD GET edit"
     it_should_behave_like "CRUD PUT update"
     it_should_behave_like "CRUD DELETE destroy"
-  
   end
 end
