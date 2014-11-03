@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :populate_articles
-  
+  after_filter :populate_user_logged_in
+
   private 
+
+  def populate_user_logged_in
+    @user_logged_in = session[:userId] != nil
+  end
 
   def populate_articles
     @articles = Article.all.order('created_at DESC')
