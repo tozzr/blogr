@@ -33,4 +33,22 @@ describe AuthController do
 
   end
 
+  describe "GET 'logout'" do
+    it "destroys the current user session" do
+      session[:userId] = 1
+      get :logout
+      expect(session[:userId]).to be_nil
+    end
+
+    it "redirects to the home page" do
+      get :logout
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "sets a flash message" do
+      get :logout
+      expect(flash[:notice]).to be == "You have been logged out successfully."
+    end
+  end
+
 end

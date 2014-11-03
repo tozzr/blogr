@@ -13,5 +13,13 @@ class AuthController < ApplicationController
     end
   end
 
+  def logout
+    session[:userId] = nil
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'You have been logged out successfully.' }
+      format.json { render :index, status: :ok }
+    end
+  end
+
 end
 
