@@ -48,20 +48,19 @@
     <!-- Sidebar -->
 
       <aside class="large-3 columns">
-
+        <% if @articles.any? %> 
         <h5>articles</h5>
         <ul class="side-nav">
-          <% if defined?(@articles) %>
-            <% @articles.each do |a| %>
-              <li>
-                <a href="/<%= a.slug %>">
-                  <%= a.title %>
-                </a>
-              </li>
-            <% end %>
+          <% @articles.each do |a| %>
+            <li>
+              <a href="/<%= a.slug %>">
+                <%= a.title %>
+              </a>
+            </li>
           <% end %>
         </ul>
-
+        <% end %>
+        
         <!-- div class="panel">
           <h5>Featured</h5>
           <p>Pork drumstick turkey dig.</p>
