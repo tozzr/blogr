@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :populate_articles
   after_filter :populate_user_logged_in
-
+  
   private 
 
   def populate_user_logged_in
