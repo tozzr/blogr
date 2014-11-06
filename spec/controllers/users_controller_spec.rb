@@ -10,13 +10,36 @@ describe UsersController do
       session[:userId] = nil
     end
 
-    it_should_behave_like "GET index redirects to login"
-    it_should_behave_like "GET show redirects to login"
-    it_should_behave_like "GET new redirects to login"
-    it_should_behave_like "POST create redirects to login"
-    it_should_behave_like "GET edit redirects to login"
-    it_should_behave_like "PUT update redirects to login"
-    it_should_behave_like "DELETE destroy redirects to login"
+    context "user present" do
+      before(:each) do
+        allow(User).to receive(:count).and_return(1)
+      end
+
+      it_should_behave_like "GET index redirects to login"
+      it_should_behave_like "GET show redirects to login"
+      it_should_behave_like "GET new redirects to login"
+      it_should_behave_like "POST create redirects to login"
+      it_should_behave_like "GET edit redirects to login"
+      it_should_behave_like "PUT update redirects to login"
+      it_should_behave_like "DELETE destroy redirects to login"
+    end
+
+    context "no user present" do
+      before(:each) do
+        allow(User).to receive(:count).and_return(0)
+      end
+
+      it_should_behave_like "GET index redirects to login"
+      it_should_behave_like "GET show redirects to login"
+      
+      it_should_behave_like "CRUD GET new"
+      it_should_behave_like "CRUD POST create"
+      
+      it_should_behave_like "GET edit redirects to login"
+      it_should_behave_like "PUT update redirects to login"
+      it_should_behave_like "DELETE destroy redirects to login"
+    end
+
   end
 
   context "logged in" do
