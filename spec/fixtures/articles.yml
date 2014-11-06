@@ -3,11 +3,21 @@ one:
   title: Foo Bar
   text: bar
   slug: foo-bar
-  published: false
+  published: true
+  updated_at: 2014-10-31  
 
 two:
   id: 2
   title: foo 2
   text: bar 2
   slug: foo-2
+  published: true
+  updated_at: 2013-10-31
+
+three:
+  id: 3
+  title: foo 3
+  text: bar 3
+  slug: foo-3
   published: false
+  updated_at: 2012-10-31

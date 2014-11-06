@@ -19,9 +19,9 @@ describe HomeController do
       expect(assigns(:article)).to_not be_nil
     end
 
-    it "assigns @articles" do
+    it "assigns @navi_items" do
       get :index
-      expect(assigns(:articles)).to_not be_nil
+      expect(assigns(:navi_items)).to_not be_nil
     end
 
     it "renders the 'index' template" do
@@ -51,9 +51,9 @@ describe HomeController do
       expect(response).to render_template('index')
     end
 
-    it "assigns @articles" do
+    it "assigns @navi_items" do
       get :slug, :slug => @article.slug
-      expect(assigns(:articles)).to_not be_nil
+      expect(assigns(:navi_items)).to_not be_nil
     end
 
   end
