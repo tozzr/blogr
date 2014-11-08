@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'foundation-rails'
 gem 'bcrypt'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'rspec-rails'

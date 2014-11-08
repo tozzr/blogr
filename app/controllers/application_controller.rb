@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :populate_user_logged_in
-  
+
   private 
 
   def populate_user_logged_in
@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
   def check_authorization
     redirect_to auth_login_path if session[:userId] == nil
   end
+
 end
