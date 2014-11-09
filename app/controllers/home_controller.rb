@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def slug
-    @article = Article.find_by_slug(params[:slug])
+    @article = Article.find_published_by_slug(params[:slug])
     render "index"
   end
 

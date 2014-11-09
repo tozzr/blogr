@@ -6,9 +6,9 @@ describe Article do
   describe "#most_recent" do
     it "returns default when no article" do
       allow(Article).to receive(:published_latest_first).and_return([])
-      mr = Article.most_recent
-      expect(mr.title).to be == "no article"
-      expect(mr.text).to be == "yet"
+      a = Article.most_recent
+      expect(a.title).to be == "no article"
+      expect(a.text).to be == "yet"
     end
 
     it "returns the last published entry" do
@@ -27,7 +27,9 @@ describe Article do
 
   describe "#find_published_by_slug" do
     it "returns nil when the article with that slug is not publishd" do
-      expect(Article.find_published_by_slug("foo-3")).to be == nil
+      a = Article.find_published_by_slug("foo-3")
+      expect(a.title).to be == "not found"
+      expect(a.text).to be == ""
     end
 
     it "only returns the article with that slug when it is published" do

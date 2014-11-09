@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   def self.most_recent
     articles = Article.published_latest_first
     if articles.empty?
-      Article.new(:title => 'no article', :text => 'yet')
+      Article.no_articles
     else
       @article = articles[0]
     end
@@ -17,6 +17,16 @@ class Article < ActiveRecord::Base
     a = Article.find_by_slug(slug)
     if a.published
       a
+    else
+      Article.not_found
     end
+  end
+
+  def self.no_articles
+    Article.new(:title => 'no article', :text => 'yet')
+  end
+
+  def self.not_found 
+    Article.new(:title => "not found", :text => "")
   end
 end
