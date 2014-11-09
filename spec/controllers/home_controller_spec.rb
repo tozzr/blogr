@@ -33,7 +33,7 @@ describe HomeController do
   describe "GET '/:slug'" do
     before(:each) do
       @article = articles(:one)
-      allow(Article).to receive(:find_by_slug).and_return(articles(:one))
+      allow(Article).to receive(:find_published_by_slug).and_return(articles(:one))
     end
 
     it "is successful" do

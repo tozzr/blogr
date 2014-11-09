@@ -13,4 +13,10 @@ class Article < ActiveRecord::Base
     Article.where(:published => true).order('updated_at DESC')
   end
 
+  def self.find_published_by_slug(slug)
+    a = Article.find_by_slug(slug)
+    if a.published
+      a
+    end
+  end
 end

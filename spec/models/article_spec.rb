@@ -25,9 +25,13 @@ describe Article do
     end
   end
 
-  describe "#find_by_slug" do
-    it "return the article with that slug" do
-      expect(Article.find_by_slug("foo-bar")).to be == articles(:one)
+  describe "#find_published_by_slug" do
+    it "returns nil when the article with that slug is not publishd" do
+      expect(Article.find_published_by_slug("foo-3")).to be == nil
+    end
+
+    it "only returns the article with that slug when it is published" do
+      expect(Article.find_published_by_slug("foo-bar")).to be == articles(:one)
     end
   end
   
