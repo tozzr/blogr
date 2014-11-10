@@ -6,7 +6,10 @@ class HomeController < ApplicationController
   end
 
   def slug
-    @article = Article.find_published_by_slug(params[:slug])
+    @article = Article.find_by_slug(params[:slug])
+    if !@article.published and !@user_logged_in
+      @article = Article.not_found
+    end
     render "index"
   end
 
@@ -15,4 +18,5 @@ class HomeController < ApplicationController
   def populate_navi_items
     @navi_items = Article.published_latest_first
   end
+  
 end

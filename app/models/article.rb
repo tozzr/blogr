@@ -13,20 +13,22 @@ class Article < ActiveRecord::Base
     Article.where(:published => true).order('updated_at DESC')
   end
 
-  def self.find_published_by_slug(slug)
-    a = Article.find_by_slug(slug)
-    if a.published
-      a
-    else
-      Article.not_found
-    end
-  end
-
   def self.no_articles
-    Article.new(:title => 'no article', :text => 'yet')
+    Article.new(:title => "no article", :text => "yet")
   end
 
   def self.not_found 
     Article.new(:title => "not found", :text => "")
   end
+  
+  def ==(other)
+    if defined? other.title and defined? other.text
+      self.title == other.title and self.text == other.text
+    elsif self.title and self.text
+      false
+    else
+      true
+    end
+  end
+
 end
