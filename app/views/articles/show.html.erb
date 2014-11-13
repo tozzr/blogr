@@ -17,7 +17,11 @@
 
 <p>
   <strong>Published:</strong>
-  <%= @article.published %>
+  <% if @article.published_at == nil %>
+    -
+  <% elsif %>
+    <%= @article.published_at %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |

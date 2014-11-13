@@ -7,7 +7,7 @@ class HomeController < ApplicationController
 
   def slug
     @article = Article.find_by_slug(params[:slug])
-    if !@article.published and !@user_logged_in
+    if @article.published_at == nil and !@user_logged_in
       @article = Article.not_found
     end
     render "index"

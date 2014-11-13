@@ -10,7 +10,8 @@ class Article < ActiveRecord::Base
   end
 
   def self.published_latest_first
-    Article.where(:published => true).order('updated_at DESC')
+    Article.where('published_at IS NOT NULL')
+           .order('published_at DESC')
   end
 
   def self.no_articles

@@ -20,8 +20,8 @@
     <%= f.text_area :text, :cols => "30", :rows => "30"%>
   </div>
   <div class="field">
-    <%= f.label :published %><br>
-    <%= f.check_box :published %>
+    <%= f.label :published_at %><br>
+    <%= f.date_field :published_at, {:include_blank => true, :default => nil} %>
   </div>
   <div class="actions">
     <%= f.submit %>

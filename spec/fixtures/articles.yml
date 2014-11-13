@@ -3,7 +3,7 @@ one:
   title: Foo Bar
   text: bar
   slug: foo-bar
-  published: true
+  published_at: 2014-12-31
   updated_at: 2014-10-31  
 
 two:
@@ -11,7 +11,7 @@ two:
   title: foo 2
   text: bar 2
   slug: foo-2
-  published: true
+  published_at: 2014-09-31
   updated_at: 2013-10-31
 
 three:
@@ -19,5 +19,5 @@ three:
   title: foo 3
   text: bar 3
   slug: foo-3
-  published: false
+  published_at: ~
   updated_at: 2012-10-31

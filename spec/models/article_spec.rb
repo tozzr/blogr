@@ -15,7 +15,7 @@ describe Article do
   end
 
   describe "#published_latest_first" do
-    it "returns only published articles order by updated DESC" do
+    it "returns only published articles ordered by published_at DESC" do
       articles = []
       articles << articles(:one)
       articles << articles(:two)
