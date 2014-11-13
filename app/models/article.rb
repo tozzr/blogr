@@ -11,6 +11,7 @@ class Article < ActiveRecord::Base
 
   def self.published_latest_first
     Article.where('published_at IS NOT NULL')
+           .where('published_at <= ?', Date.today)
            .order('published_at DESC')
   end
 

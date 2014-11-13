@@ -3,7 +3,7 @@ one:
   title: Foo Bar
   text: bar
   slug: foo-bar
-  published_at: 2014-12-31
+  published_at: <%= Date.today %>
   updated_at: 2014-10-31  
 
 two:
@@ -20,4 +20,12 @@ three:
   text: bar 3
   slug: foo-3
   published_at: ~
+  updated_at: 2012-10-31
+
+four:
+  id: 4
+  title: foo 4
+  text: bar 4
+  slug: foo-4
+  published_at: 3000-12-31
   updated_at: 2012-10-31
