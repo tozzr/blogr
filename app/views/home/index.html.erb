@@ -1,3 +1,40 @@
 <h2><%= @article.title %></h2>
 
 <p><%= markdown @article.text %></p>
+
+<hr>
+
+<p id="notice"><%= notice %></p>
+
+<fieldset>
+  <legend>Comments</legend>
+  <% @article.comments.each do |comment| %>
+    <p>
+      <strong>Commenter:</strong>
+      <%= comment.commenter %>
+    </p>
+   
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </p>
+  <% end %>
+</fieldset>
+
+<fieldset> 
+  <legend>Add a comment</legend>
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+    <p>
+      <%= f.label :commenter %><br>
+      <%= f.text_field :commenter %>
+    </p>
+    <p>
+      <%= f.label :body %><br>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+</fieldset>
+

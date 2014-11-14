@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  has_many :comments
 
   def self.most_recent
     articles = Article.published_latest_first
