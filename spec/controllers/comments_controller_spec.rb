@@ -2,15 +2,19 @@ require 'rails_helper'
 
 describe CommentsController do
   
+  before(:each) do
+    @article = Article.new
+    allow(@article).to receive(:id).and_return(1)
+    allow(@article).to receive(:slug).and_return('foo')
+    allow(Article).to receive(:find).and_return(@article)
+    @comment = Comment.new
+    @params = {"title" => 'test', "key" => "value"}
+  end
+
   describe "#create" do
     describe "with valid params" do
       
       before(:each) do
-        @article = Article.new
-        allow(@article).to receive(:id).and_return(1)
-        allow(@article).to receive(:slug).and_return('foo')
-        allow(Article).to receive(:find).and_return(@article)
-        @comment = Comment.new
         allow(@article.comments).to receive(:create!).and_return(@comment)
         @params = {"title" => 'test', "key" => "value"}
       end
@@ -38,12 +42,6 @@ describe CommentsController do
       before(:each) do
         @errors = instance_double(Array, :collect => [], :to_json => 'JSON')
         
-        @article = Article.new
-        allow(@article).to receive(:id).and_return(1)
-        allow(@article).to receive(:slug).and_return('foo')
-        allow(Article).to receive(:find).and_return(@article)
-        @comment = Comment.new
-        allow(@comment).to receive(:id).and_return(nil)
         allow(@article.comments).to receive(:create!).and_raise(ActiveRecord::RecordInvalid.new(@comment))
         @params = {"commenter" => '', "body" => ""}
       end
@@ -57,6 +55,24 @@ describe CommentsController do
         post 'create', :article_id => @article.id, :comment => @params, :format => format
       end
     end
+  end
+
+  describe "#index" do
+  
+    it "should render the correct template when requesting HTML" do
+      do_get
+      expect(response).to render_template(:index)
+    end
+
+    it "should find the @comments" do
+      allow(@article).to receive(:comments).and_return([])
+      do_get
+    end
+
+    def do_get
+      get :index, :article_id => 1
+    end
+
   end
 
 end
