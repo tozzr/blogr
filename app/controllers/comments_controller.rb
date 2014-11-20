@@ -16,6 +16,23 @@ class CommentsController < ApplicationController
     @comments = @article.comments
   end
 
+  def destroy
+    @article = Article.find(params[:article_id])
+    begin
+      @comment = Comment.find(params[:id])
+      @comment.destroy
+      respond_to do |format|
+        format.html { redirect_to article_comments_url, notice: 'Comment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    rescue Exception => e
+      respond_to do |format|
+        format.html { redirect_to article_comments_url }
+        format.json { head :not_found }
+      end
+    end
+  end
+
   private
     def comment_params
       params.require(:comment).permit(:commenter, :body)

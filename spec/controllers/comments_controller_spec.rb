@@ -75,4 +75,64 @@ describe CommentsController do
 
   end
 
+  describe "#destroy" do
+    describe "with a valid id" do
+    
+      before(:each) do
+        allow(Comment).to receive(:find).and_return(@comment)
+        allow(@comment).to receive(:id).and_return(1)
+      end
+      
+      it "should find the correct #{@model_name}" do
+        allow(Comment).to receive(:find).with(@comment.id.to_s).and_return(@comment)
+        do_delete
+      end
+      
+      it "should destroy the comment" do
+        allow(@comment).to receive(:destroy).and_return(true)    
+        do_delete
+      end
+      
+      it "should redirect to article comments index when requesting HTML" do
+        do_delete
+        expect(response).to redirect_to("/articles/#{@article.id.to_s}/comments")
+      end
+
+      it "sets a flash message" do
+        do_delete
+        expect(flash[:notice]).to be == "Comment was successfully destroyed."
+      end
+
+      it "should render 200 when requesting JSON" do
+        do_delete 'json'
+        expect(response.status).to be == 204
+      end
+      
+      def do_delete format = 'html'
+        delete 'destroy', :article_id => @article.id, :id => @comment.id, :format => format
+      end
+    end
+
+    describe "with an invalid ID" do
+      
+      before(:each) do
+        allow(Comment).to receive(:find).and_raise(ActiveRecord::RecordNotFound)
+      end
+      
+      it "should redirect to articles comments index when requesting HTML" do
+        do_delete
+        expect(response).to redirect_to("/articles/#{@article.id.to_s}/comments")    
+      end
+      
+      it "should render a 404 when requesting JSON" do
+        do_delete 'json'
+        expect(response.status).to be == 404
+      end
+
+      def do_delete format = 'html'
+        delete 'destroy', :article_id => @article.id, :id => -1, :format => format
+      end
+    end
+  end
+
 end

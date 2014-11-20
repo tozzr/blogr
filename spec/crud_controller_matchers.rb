@@ -353,7 +353,6 @@ shared_examples "CRUD DELETE destroy" do
   describe "with a valid id" do
     
     before(:each) do
-      allow(@stubbed_model).to receive(:destroy).and_return(true)
       allow(@model_klass).to receive(:find).and_return(@stubbed_model)
     end
     
