@@ -11,7 +11,7 @@ describe CommentsController do
     @params = {"title" => 'test', "key" => "value"}
   end
 
-  describe "#create" do
+  describe "CRUD POST create" do
     describe "with valid params" do
       
       before(:each) do
@@ -57,7 +57,7 @@ describe CommentsController do
     end
   end
 
-  describe "#index" do
+  describe "CRUD GET index" do
   
     it "should render the correct template when requesting HTML" do
       do_get
@@ -75,7 +75,7 @@ describe CommentsController do
 
   end
 
-  describe "#destroy" do
+  describe "CRUD DELETE destroy" do
     describe "with a valid id" do
     
       before(:each) do
@@ -133,6 +133,46 @@ describe CommentsController do
         delete 'destroy', :article_id => @article.id, :id => -1, :format => format
       end
     end
+  end
+
+  describe "CRUD GET show" do
+
+    describe "with a valid ID" do
+      before(:each) do
+        allow(Comment).to receive(:find).and_return(@comment)
+        allow(@comment).to receive(:id).and_return(1)
+      end
+      
+      it "should find the correct comment" do
+        allow(Comment).to receive(:find).with(@comment.id.to_s).and_return(@comment)
+        do_get
+      end
+      
+      it "should render the correct template when requesting HTML" do
+        do_get
+        expect(response).to render_template(:show)
+      end
+      
+      def do_get format = 'html'
+        get 'show', :article_id => @article.id, :id => @comment.id, :format => format
+      end
+    end
+    
+    describe "with an invalid ID" do
+      before(:each) do
+        allow(Comment).to receive(:find).and_raise(ActiveRecord::RecordNotFound)
+      end
+      
+      it "should redirect to article comments if not found via HTML" do
+        do_get
+        expect(response).to redirect_to("/articles/#{@article.id.to_s}/comments")
+      end
+      
+      def do_get format = 'html'
+        get 'show', :article_id => @article.id, :id => -1, :format => format
+      end
+    end
+
   end
 
 end

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commenter:</strong>
+  <%= @comment.commenter %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= markdown @comment.body %>
+</p>
+
+<%= link_to 'Back', article_comments_path %>

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: [:show, :destroy]
   #before_filter :check_authorization
 
   def create
@@ -16,24 +17,29 @@ class CommentsController < ApplicationController
     @comments = @article.comments
   end
 
+  def show
+  end
+
   def destroy
-    @article = Article.find(params[:article_id])
-    begin
-      @comment = Comment.find(params[:id])
-      @comment.destroy
-      respond_to do |format|
-        format.html { redirect_to article_comments_url, notice: 'Comment was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    rescue Exception => e
-      respond_to do |format|
-        format.html { redirect_to article_comments_url }
-        format.json { head :not_found }
-      end
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to article_comments_url, notice: 'Comment was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
   private
+    def set_comment
+      begin
+        @comment = Comment.find(params[:id])
+      rescue Exception => e
+        respond_to do |format|
+          format.html { redirect_to article_comments_url }
+          format.json { head :not_found }
+        end
+      end
+    end
+
     def comment_params
       params.require(:comment).permit(:commenter, :body)
     end
