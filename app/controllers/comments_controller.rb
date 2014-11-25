@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.create!(comment_params)
+    Notifier.notify_about(@article, @comment).deliver
     redirect_to slug_path(@article.slug), notice: 'comment was successfully saved.'  
   end
   

@@ -3,12 +3,11 @@ require 'rails_helper'
 describe CommentsController do
   
   before(:each) do
-    @article = Article.new
+    @article = Article.new(:title => 'foo')
     allow(@article).to receive(:id).and_return(1)
     allow(@article).to receive(:slug).and_return('foo')
     allow(Article).to receive(:find).and_return(@article)
     @comment = Comment.new
-    @params = {"title" => 'test', "key" => "value"}
   end
 
   describe "CRUD POST create" do
@@ -16,7 +15,7 @@ describe CommentsController do
       
       before(:each) do
         allow(@article.comments).to receive(:create!).and_return(@comment)
-        @params = {"title" => 'test', "key" => "value"}
+        @params = {"body" => "test", "commenter" => "value"}
       end
       
       it "should build a new comment" do
@@ -31,6 +30,12 @@ describe CommentsController do
       it "sets a flash message" do
         do_post
         expect(flash[:notice]).to be == "comment was successfully saved."
+      end
+
+      it "sends an email" do
+        count = ActionMailer::Base.deliveries.count
+        do_post
+        expect(ActionMailer::Base.deliveries.count).to be == count+1
       end
 
       def do_post format = 'html'
