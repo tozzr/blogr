@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130002139) do
+ActiveRecord::Schema.define(version: 20141130003121) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20141130002139) do
     t.datetime "updated_at"
     t.integer  "window_w"
     t.integer  "window_h"
+    t.string   "session_id"
   end
 
   create_table "users", force: true do |t|

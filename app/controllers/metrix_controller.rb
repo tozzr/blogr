@@ -2,6 +2,7 @@ class MetrixController < ApplicationController
 
   def click
     @click = Metrix::Click.new(click_params)
+    @click.session_id = request.session_options[:id]
     if @click.save
       render json: {}, status: :created
     else
