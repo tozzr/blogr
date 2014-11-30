@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post "/auth/login", :controller => "auth", :action => "login"
   get "/auth/logout", :controller => "auth", :action => "logout"
 
+  post "/metrix/click", :controller => "metrix", :action => "click"
   root 'home#index'
   
 end
