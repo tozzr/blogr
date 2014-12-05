@@ -10,4 +10,10 @@
   <%= markdown @comment.body %>
 </p>
 
+<p>
+  <strong>spam:</strong>
+  <%= @comment.is_spam  ? 'yes' : 'no' %>
+  (<%= @comment.honey %>)
+</p>
+
 <%= link_to 'Back', article_comments_path %>

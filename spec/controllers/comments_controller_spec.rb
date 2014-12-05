@@ -45,10 +45,8 @@ describe CommentsController do
 
     describe "with invalid parameters" do
       before(:each) do
-        @errors = instance_double(Array, :collect => [], :to_json => 'JSON')
-        
         allow(@article.comments).to receive(:create!).and_raise(ActiveRecord::RecordInvalid.new(@comment))
-        @params = {"commenter" => '', "body" => ""}
+        @params = {"commenter" => "", "body" => ""}
       end
       
       it "sets a flash message" do
@@ -60,6 +58,26 @@ describe CommentsController do
         post 'create', :article_id => @article.id, :comment => @params, :format => format
       end
     end
+
+    describe "with filled honey parameter" do 
+      before(:each) do
+        allow(@article.comments).to receive(:create!).and_return(@comment)
+        @params = {"body" => "test", "commenter" => "value", "honey" => "honey pot", "is_spam" => false}
+      end
+
+      it "marks spam as such" do
+        do_post
+        params = ActionController::Parameters.new(
+          comment: {body: 'foo', commenter: 'bar', honey: 'honey pot', is_spam: false})
+        comment_params = CommentsController::CommentParams.build(params)
+        expect(comment_params).to eq({'body' => 'foo', 'commenter' => 'bar', 'honey' => 'honey pot', 'is_spam' => true})  
+      end
+
+      def do_post format = 'html'
+        post 'create', :article_id => @article.id, :comment => @params, :format => format
+      end
+    end
+
   end
 
   describe "CRUD GET index" do

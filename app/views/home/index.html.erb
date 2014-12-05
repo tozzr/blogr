@@ -18,12 +18,14 @@
       <strong>Comment:</strong>
       <%= comment.body %>
     </p>
+    <hr />
   <% end %>
 </fieldset>
 
 <fieldset> 
   <legend>Add a comment</legend>
   <%= form_for([@article, @article.comments.build]) do |f| %>
+    <%= f.text_field :honey %>
     <p>
       <%= f.label :commenter %><br>
       <%= f.text_field :commenter %>

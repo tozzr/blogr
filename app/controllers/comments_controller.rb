@@ -1,10 +1,16 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :destroy]
-  #before_filter :check_authorization
+  
+  class CommentParams
+    def self.build params
+      params.require(:comment)[:is_spam] = params.require(:comment)[:honey].to_s != ''
+      params.require(:comment).permit(:commenter, :body, :honey, :is_spam)  
+    end
+  end
 
   def create
     @article = Article.find(params[:article_id])
-    @comment = @article.comments.create!(comment_params)
+    @comment = @article.comments.create!(CommentParams.build(params))
     Notifier.notify_about(@article, @comment).deliver
     redirect_to slug_path(@article.slug), notice: 'comment was successfully saved.'  
   end
@@ -40,9 +46,4 @@ class CommentsController < ApplicationController
         end
       end
     end
-
-    def comment_params
-      params.require(:comment).permit(:commenter, :body)
-    end
-
 end
