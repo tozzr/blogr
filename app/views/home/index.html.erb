@@ -1,5 +1,7 @@
 <h2><%= @article.title %></h2>
 
+<h3>by <%= @article.user ? @article.user.username : 'unknown' %> on <%= @article.published_at %></h3>
+
 <p><%= markdown @article.text %></p>
 
 <hr>

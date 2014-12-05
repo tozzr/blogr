@@ -23,6 +23,11 @@
     <%= f.label :published_at %><br>
     <%= f.date_field :published_at, {:include_blank => true, :default => nil} %>
   </div>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.select :user_id, options_for_select(User.all.map{|s|[s.username, s.id]}) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

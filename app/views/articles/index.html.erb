@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Slug</th>
+      <th>Author</th>
       <th>Published</th>
       <th>Comments</th>
       <th colspan="3"></th>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= article.title %></td>
         <td><%= article.slug %></td>
+        <td><%= article.user ? article.user.username : 'unknown' %></td>
         <td>
           <% if article.published_at == nil %>
             -

@@ -77,7 +77,7 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      permitted = params.require(:article).permit(:title, :text, :published_at)
+      permitted = params.require(:article).permit(:title, :text, :published_at, :user_id)
       permitted[:slug] = Blog::Slugr.exec permitted[:title]
       permitted
     end

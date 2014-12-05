@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  belongs_to :user
   has_many :comments
 
   def self.most_recent

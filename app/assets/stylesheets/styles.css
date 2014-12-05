@@ -10,6 +10,10 @@ h1, h2, h3, h4, h5, h6, a, .side-nav, .panel a {
   color: green;
 }
 
+h1 { font-size: 3em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1em; }
+
 h1 {
 	border: 0px solid red;
 	margin-top: 1.0rem;
