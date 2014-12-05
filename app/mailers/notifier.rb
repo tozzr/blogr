@@ -1,5 +1,5 @@
 class Notifier < ActionMailer::Base
-  default from: 'comments@tozzr.com'
+  default from: 'mail@tozzr.com'
  
   def notify_about(article, comment)
     @article = article ? article.title : 'article'
